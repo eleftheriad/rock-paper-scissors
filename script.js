@@ -53,24 +53,42 @@ let ComputerScore = 0
 let PlayerWon = false
 let PlayerLost = false
 let PlayerDraw = false
-for (let i = 0; i < 5; i++) {
-    
-    const playerSelection = prompt("Type rock paper or scissors");
-    const computerSelection = computerPlay();
-    console.log(PlayerScore, ComputerScore);
-    playRound(playerSelection, computerSelection);
-    if(PlayerWon == true){
-        PlayerScore++;
-    }
-    else if (PlayerLost == true){
-        ComputerScore++;
-    } 
-    PlayerWon = false
-    PlayerLost = false
-    PlayerDraw = false
-}
-if (PlayerScore > ComputerScore){
-    console.log("congrats u win")
-}else if(PlayerScore < ComputerScore)
-    console.log("loser")
-else console.log("draw... ")
+//let p_score = 0, c_score = 0;
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const computerSelection = computerPlay();
+        let playerSelection = button.className;
+        playRound(playerSelection, computerSelection);
+        
+        if(PlayerWon == true){
+            PlayerScore++;
+        }
+        else if (PlayerLost == true){
+            ComputerScore++;
+        } 
+        p_score =  document.querySelector('.player-score');
+        c_score =  document.querySelector('.computer-score');
+
+        p_score.textContent = PlayerScore;
+        c_score.textContent = ComputerScore;
+
+        PlayerWon = false
+        PlayerLost = false
+        PlayerDraw = false
+
+        if (PlayerScore == 5 || ComputerScore == 5) {
+            gameover(PlayerScore, ComputerScore);
+        }
+    });
+});
+
+function gameover(PlayerScore, ComputerScore){
+    if (PlayerScore > ComputerScore){
+        console.log("congrats u win")
+    }else console.log("loser")
+
+};
+
