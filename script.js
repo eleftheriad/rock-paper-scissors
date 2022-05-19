@@ -86,9 +86,12 @@ buttons.forEach((button) => {
 });
 
 function gameover(PlayerScore, ComputerScore){
+    const msg = document.createElement('div');
+    msg.classList.add("msg");
     if (PlayerScore > ComputerScore){
-        console.log("congrats u win")
-    }else console.log("loser")
+        msg.textContent = "Congratulations, you won!"
 
+    }else msg.textContent = "You lost..."
+    document.body.appendChild(msg);
 };
 
